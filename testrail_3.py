@@ -80,10 +80,12 @@ class APIClient:
                 error = '"' + result['error'] + '"'
             else:
                 error = 'No additional error message received'
-            raise APIError('TestRail API returned HTTP {} ({})'.format(e.code, error))
+            aex = APIError('TestRail API returned HTTP {} ({})'.format(e.code, error))
+            aex.code = e.code
+            raise aex
 
         return result
 
 
 class APIError(Exception):
-    pass
+    code = None

@@ -1,8 +1,9 @@
+import logging
 from testrail_3 import *
 
 
 class TestRailFlow(object):
-    """ General flows for testrail
+    """ General flows for TestRail
 
     """
     def __init__(self, user='', password=''):
@@ -11,6 +12,7 @@ class TestRailFlow(object):
         :param user: username, should be your @hp email address
         :param password: API key, generate it via TestRail settings
         """
+        logging.basicConfig(level=logging.INFO)
         self.client = APIClient('https://jiracso.testrail.net')
         self.client.user = 'ho-lun-zavvio.mok@hp.com'
         self.client.password = '3HI/BnjdpLGdkHIjdzC2-mnEkT3LbEZQTUPvF.P4x'  # API Key
@@ -23,9 +25,9 @@ class TestRailFlow(object):
     def search_name_in_response(response, name, target):
         for r in response:
             if r['name'] == name:
-                print("Found {} [{}]: id={}".format(target, name, r['id']))
+                logging.info("Found {} [{}]: id={}".format(target, name, r['id']))
                 return str(r['id'])
-        print("{} [{}] not found.".format(target, name))
+        logging.info("{} [{}] not found.".format(target, name))
         return None
 
     def get_plan_id_by_name(self, name, project_id, milestone_id=''):

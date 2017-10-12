@@ -1,10 +1,19 @@
-test_status = {
+test_status_by_id = {
     '1': 'Passed',
     '2': 'Blocked',
     '3': 'Untested',
     '4': 'Retest',
     '5': 'Failed',
     '6': 'N/A',
+}
+
+test_status_by_name = {
+    'Passed': '1',
+    'Blocked': '2',
+    'Untested': '3',
+    'Retest': '4',
+    'Failed': '5',
+    'N/A': '6',
 }
 
 # status = client.send_get('get_statuses')
@@ -64,3 +73,35 @@ test_status = {
   'label': 'N/A',
   'name': 'custom_status1'}]
 """  # end of statuses
+
+test_case_id = {
+    'MobileApps.tests.android.aio.bat.test_suite_01_android_aio_bat_scan_tile.Test_Suite_01_Android_AiO_BAT_Scan_Tile': {
+        # 'test_01_scan_multiple_pages': '86174',
+        # 'test_02_scan_pdf_share_gmail': '86175',
+        # 'test_03_scan_pdf_print_trapdoor_ui': '86176'
+    },
+    'MobileApps.tests.android.aio.bat.test_suite_02_android_aio_bat_scan_to_email_tile.Test_Suite_02_Android_AiO_BAT_Scan_To_Email_Tile': {
+
+    },
+    'MobileApps.tests.android.aio.bat.test_suite_03_android_aio_bat_scan_to_cloud_tile.Test_Suite_03_Android_AiO_BAT_Scan_To_Cloud_Tile': {
+
+    },
+    'MobileApps.tests.android.aio.bat.test_suite_04_android_aio_bat_print_photos_tile.Test_Suite_04_Android_AIO_BAT_Print_Photos_Tile': {
+
+    },
+    'MobileApps.tests.android.aio.bat.test_suite_05_android_aio_bat_print_documents_tile.Test_Suite_05_Android_AIO_BAT_Print_Documents_Tile': {
+        'test_01_print_documents_pdf_share_gmail': '86205',
+        'test_02_print_documents_jpg_share_gmail': '86206',
+        'test_03_print_documents_jpg_print_trapdoor_ui': '86207'
+    },
+    'MobileApps.tests.android.aio.bat.test_suite_06_android_aio_bat_camera_scan.Test_Suite_06_Android_Bat_Camera_Scan': {
+
+    },
+    'MobileApps.tests.android.aio.bat.test_suite_08_android_aio_bat_printer_info.Test_Suite_08_Android_AiO_Bat_Printer_Info': {
+
+    },
+    'MobileApps.tests.android.aio.bat.test_suite_09_android_aio_bat_moobe.Test_Suite_09_Android_AiO_MOOBE': {
+
+    },
+    'link': 'https://jiracso.testrail.net/index.php?/cases/view/<test case id>'
+}
