@@ -90,9 +90,9 @@ test_case_id = {
 
     },
     'MobileApps.tests.android.aio.bat.test_suite_05_android_aio_bat_print_documents_tile.Test_Suite_05_Android_AIO_BAT_Print_Documents_Tile': {
-        'test_01_print_documents_pdf_share_gmail': '86205',
-        'test_02_print_documents_jpg_share_gmail': '86206',
-        'test_03_print_documents_jpg_print_trapdoor_ui': '86207'
+        'test_01_print_documents_pdf_share_gmail': ['86205', '86206', '86207'],
+        'test_02_print_documents_jpg_share_gmail': '86208',
+        'test_03_print_documents_jpg_print_trapdoor_ui': '86209'
     },
     'MobileApps.tests.android.aio.bat.test_suite_06_android_aio_bat_camera_scan.Test_Suite_06_Android_Bat_Camera_Scan': {
 

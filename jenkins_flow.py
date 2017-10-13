@@ -4,6 +4,7 @@ import logging
 import pprint
 import urllib.request
 from urllib.error import HTTPError
+from time import sleep
 
 
 class JenkinsFlow(object):
@@ -121,13 +122,20 @@ class JenkinsFlow(object):
                 # Parsing apk name or build version, e.g. v4.6.99999
                 data['version'] = apk_version
 
-                packet['results'].append(data)
+                if type(data['case_id']) is str:
+                    packet['results'].append(data)
+                elif type(data['case_id']) is list:
+                    temp_list = data['case_id']
+                    for item in temp_list:
+                        dd = data.copy()
+                        dd['case_id'] = item
+                        packet['results'].append(dd)
 
                 # print(str(class_name[-3:]) + " --- " + case['name'] + ": " + case['status'] + " => " + data['status_id'])
         logging.info(' POST-ready data >>\n' + pprint.pformat(packet))
         return packet
 
 
-# JF = JenkinsFlow(fixed_build='679')
-# JF.generate_post_data()
+JF = JenkinsFlow(fixed_build='679')
+JF.generate_post_data()
 # JF.get_apk_name()
