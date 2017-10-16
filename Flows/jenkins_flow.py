@@ -1,10 +1,9 @@
 import ast
-import constant
 import logging
 import pprint
 import urllib.request
+from Resource import constant
 from urllib.error import HTTPError
-from time import sleep
 
 
 class JenkinsFlow(object):
@@ -22,10 +21,9 @@ class JenkinsFlow(object):
     CONSOLE_OUTPUT_ADDR = '/consoleText'
 
     # Customizable address field
-    JOB_NAME = 'Android_AIO_Marshmallow_BAT' + '/'
     FIXED_BUILD = '632'
 
-    def __init__(self, jenkins_ip_addr=None, job_name=None, fixed_build=None):
+    def __init__(self, job_name, jenkins_ip_addr=None, fixed_build=None):
         """ Initialize APIClient
 
         :param jenkins_ip_addr: e.g. "http://15.98.72.76:8080"
@@ -34,8 +32,7 @@ class JenkinsFlow(object):
         logging.basicConfig(level=logging.INFO)
         if jenkins_ip_addr is not None:
             self.JENKINS_IP_ADDR = jenkins_ip_addr + '/job/'
-        if job_name is not None:
-            self.JOB_NAME = job_name + '/'
+        self.JOB_NAME = job_name + '/'
 
         # Composed URLs
         if fixed_build is not None:
@@ -136,6 +133,7 @@ class JenkinsFlow(object):
         return packet
 
 
-JF = JenkinsFlow(fixed_build='679')
-JF.generate_post_data()
+# JOB_NAME = 'Android_AIO_Marshmallow_BAT/'
+# JF = JenkinsFlow(job_name=JOB_NAME)
+# JF.generate_post_data()
 # JF.get_apk_name()

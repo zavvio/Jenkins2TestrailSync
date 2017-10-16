@@ -1,12 +1,12 @@
 import logging
-from testrail_3 import *
+from TestRailAPI.testrail_3 import *
 
 
 class TestRailFlow(object):
     """ General flows for TestRail
 
     """
-    def __init__(self, user='', password=''):
+    def __init__(self, user, password):
         """ Initialize APIClient
 
         :param user: username, should be your @hp email address
@@ -14,12 +14,8 @@ class TestRailFlow(object):
         """
         logging.basicConfig(level=logging.INFO)
         self.client = APIClient('https://jiracso.testrail.net')
-        self.client.user = 'ho-lun-zavvio.mok@hp.com'
-        self.client.password = '3HI/BnjdpLGdkHIjdzC2-mnEkT3LbEZQTUPvF.P4x'  # API Key
-        if user != '':
-            self.client.user = user
-        if password != '':
-            self.client.password = password
+        self.client.user = user
+        self.client.password = password
 
     @staticmethod
     def search_name_in_response(response, name, target):
