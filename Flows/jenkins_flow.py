@@ -80,6 +80,22 @@ class JenkinsFlow(object):
 
     def generate_post_data(self):
         """ Generate the data packet ready to be POST to TestRail
+        # sample_packet = {
+        #         "results": [
+        #             {
+        #                 "case_id": 86205,
+        #                 "status_id": 5,
+        #                 "comment": "This test failed"
+        #             },
+        #             {
+        #                 "case_id": 9999999999999,
+        #                 "status_id": 4,
+        #                 "comment": "This test needs retest",
+        #                 "elapsed": "1s",
+        #                 "version": "4.6.001"
+        #             }
+        #         ]
+        #     }
 
         :return: A POST-format of the parsed Jenkins result if it's available.
         """
