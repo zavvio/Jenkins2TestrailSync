@@ -1,5 +1,5 @@
 import logging
-from TestRailAPI.testrail_3 import *
+from testrailAPI.testrail_3 import *
 
 
 class TestRailFlow(object):

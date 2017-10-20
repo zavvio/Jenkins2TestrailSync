@@ -2,7 +2,7 @@ import ast
 import logging
 import pprint
 import urllib.request
-from Resource import constant
+from resource import constant
 from urllib.error import HTTPError
 
 
@@ -78,25 +78,26 @@ class JenkinsFlow(object):
                     logging.info('>> App Version: {}'.format(app_version))
                     return app_version
 
-    def generate_post_data(self):
+    def generate_post_data(self, test_case_id=None):
         """ Generate the data packet ready to be POST to TestRail
-        # sample_packet = {
-        #         "results": [
-        #             {
-        #                 "case_id": 86205,
-        #                 "status_id": 5,
-        #                 "comment": "This test failed"
-        #             },
-        #             {
-        #                 "case_id": 9999999999999,
-        #                 "status_id": 4,
-        #                 "comment": "This test needs retest",
-        #                 "elapsed": "1s",
-        #                 "version": "4.6.001"
-        #             }
-        #         ]
-        #     }
-
+        Data packet is in the following format:
+            # sample_packet = {
+            #         "results": [
+            #             {
+            #                 "case_id": 86205,
+            #                 "status_id": 5,
+            #                 "comment": "This test failed"
+            #             },
+            #             {
+            #                 "case_id": 9999999999999,
+            #                 "status_id": 4,
+            #                 "comment": "This test needs retest",
+            #                 "elapsed": "1s",
+            #                 "version": "4.6.001"
+            #             }
+            #         ]
+            #     }
+        :param test_case_id: a data structure storing the Test Case IDs
         :return: A POST-format of the parsed Jenkins result if it's available.
         """
         if self.result is None:
@@ -114,7 +115,9 @@ class JenkinsFlow(object):
             if case['name'][:4] == "test":
                 # Fetching the corresponding test case id on TestRail
                 try:
-                    suite = constant.test_case_id[case['className']]
+                    if test_case_id is None:
+                        test_case_id = constant.test_case_id
+                    suite = test_case_id[case['className']]
                     try:
                         case_id = suite[case['name']]
                         data['case_id'] = case_id

@@ -1,9 +1,9 @@
 import logging
 from pprint import pprint
 
-from Flows.jenkins_flow import JenkinsFlow
-from Flows.testrail_flow import TestRailFlow
-from TestRailAPI.testrail_3 import *
+from flows.jenkins_flow import JenkinsFlow
+from flows.testrail_flow import TestRailFlow
+from testrailAPI.testrail_3 import *
 
 user = 'ho-lun-zavvio.mok@hp.com'  # username = @hp.com email address
 password = '3HI/BnjdpLGdkHIjdzC2-mnEkT3LbEZQTUPvF.P4x'  # API Key - generate this via TestRail settings
