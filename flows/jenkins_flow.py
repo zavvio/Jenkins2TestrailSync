@@ -78,7 +78,7 @@ class JenkinsFlow(object):
                     logging.info('>> App Version: {}'.format(app_version))
                     return app_version
 
-    def generate_post_data(self, test_case_id=None):
+    def generate_post_data(self, test_case_id):
         """ Generate the data packet ready to be POST to TestRail
         Data packet is in the following format:
             # sample_packet = {
@@ -115,8 +115,6 @@ class JenkinsFlow(object):
             if case['name'][:4] == "test":
                 # Fetching the corresponding test case id on TestRail
                 try:
-                    if test_case_id is None:
-                        test_case_id = constant.test_case_id
                     suite = test_case_id[case['className']]
                     try:
                         case_id = suite[case['name']]
