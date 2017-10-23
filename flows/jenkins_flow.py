@@ -78,6 +78,40 @@ class JenkinsFlow(object):
                     logging.info('>> App Version: {}'.format(app_version))
                     return app_version
 
+    def get_device_info(self):
+        """ Parse console log to retrieve info of the device under test
+        device = DEVICE-device-name
+        platform = DEVICE-platform-name
+        version = DEVICE-platform-version
+        :return: tuple (device, platform, version)
+        """
+        try:
+            resp = urllib.request.urlopen(self.CONSOLE_LINK).read().decode("utf-8")
+        except HTTPError:
+            logging.warning(" Test build failed, not parsing for device info.")
+        else:
+            device, platform, version = None, None, None
+            strings = resp.split('\n')
+            for substring in strings:
+                if 'DEVICE-device-name' in substring:
+                    device = substring.strip().split('=')[-1]
+                    logging.info('>> Device: {}'.format(device))
+                    break
+                    # return device_name
+            for substring in strings:
+                if 'DEVICE-platform-name' in substring:
+                    platform = substring.strip().split('=')[-1]
+                    logging.info('>> Platform: {}'.format(platform))
+                    break
+                    # return platform
+            for substring in strings:
+                if 'DEVICE-platform-version' in substring:
+                    version = substring.strip().split('=')[-1]
+                    logging.info('>> Platform version: {}'.format(version))
+                    break
+                    # return version
+            return device, platform, version
+
     def generate_post_data(self, test_case_id):
         """ Generate the data packet ready to be POST to TestRail
         Data packet is in the following format:
@@ -104,6 +138,7 @@ class JenkinsFlow(object):
             logging.warning(" Self.result is empty meaning test result wasn't parsed right from Jenkins.")
             return None
         apk_version = self.get_apk_name()
+        device, platform, version = self.get_device_info()
         packet = {
             'results': []
         }
@@ -135,6 +170,7 @@ class JenkinsFlow(object):
 
                 # Parsing apk name or build version, e.g. v4.6.99999
                 data['version'] = apk_version
+                data['comment'] = "Device={}\nPlatform={}\nPlatform version={}".format(device, platform, version)
 
                 if type(data['case_id']) is str:
                     packet['results'].append(data)
@@ -150,7 +186,19 @@ class JenkinsFlow(object):
         return packet
 
 
+# # Sample test_case_id
+# sample_test_case_id = {
+#     'MobileApps.tests.android.aio.bat.test_suite_01_android_aio_bat_scan_tile.Test_Suite_01_Android_AiO_BAT_Scan_Tile': {
+#         'test_01_scan_multiple_pages': '214866',
+#         'test_02_scan_pdf_share_gmail': '214867',
+#         'test_03_scan_pdf_print_trapdoor_ui': '214868',
+#         'test_05_scan_pdf_save': '214869',
+#         'test_06_scan_jpg_save': '214870',
+#         'test_07_verify_existed_saved_files': '214871'
+#     }
+# }
 # JOB_NAME = 'Android_AIO_Marshmallow_BAT/'
 # JF = JenkinsFlow(job_name=JOB_NAME)
-# JF.generate_post_data()
+# JF.generate_post_data(sample_test_case_id)
 # JF.get_apk_name()
+# d, p, v = JF.get_device_info()

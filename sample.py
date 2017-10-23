@@ -56,9 +56,20 @@ run_id = trf.get_run_id_in_plan_by_name('Android - HP Smart (Automated BAT) [FR]
 # Happy-path example of pulling latest BAT result from Jenkins to post it on TestRail
 JOB_NAME = 'Android_AIO_Marshmallow_BAT/'  # job name on Jenkins
 JF = JenkinsFlow(job_name=JOB_NAME, fixed_build='679')  # fixed_build is optional
+# Sample test_case_id
+sample_test_case_id = {
+    'MobileApps.tests.android.aio.bat.test_suite_01_android_aio_bat_scan_tile.Test_Suite_01_Android_AiO_BAT_Scan_Tile': {
+        'test_01_scan_multiple_pages': '214866',
+        'test_02_scan_pdf_share_gmail': '214867',
+        'test_03_scan_pdf_print_trapdoor_ui': '214868',
+        'test_05_scan_pdf_save': '214869',
+        'test_06_scan_jpg_save': '214870',
+        'test_07_verify_existed_saved_files': '214871'
+    }
+}
 try:
     run_id = '9999999999999'  # get this from "get_run_id_in_plan_by_name"
-    test_result = JF.generate_post_data()
+    test_result = JF.generate_post_data(sample_test_case_id)
     response = trf.post_results_to_test_run(run_id, test_result)
 except APIError as e:
     logging.warning(' Error code - {}'.format(e.code))
