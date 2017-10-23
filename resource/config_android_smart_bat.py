@@ -1,4 +1,4 @@
-TESTRAIL_LINK = 'https://jiracso.testrail.net'
+TESTRAIL_LINK = 'https://testrail.tools.cso-hp.com'
 USERNAME = ''  # username = @hp.com email address
 PASSWORD = ''  # API Key - generate this via TestRail settings
 PROJECT = 'MAQA'

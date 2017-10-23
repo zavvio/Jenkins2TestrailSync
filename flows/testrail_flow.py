@@ -6,14 +6,15 @@ class TestRailFlow(object):
     """ General flows for TestRail
 
     """
-    def __init__(self, user, password):
+    def __init__(self, testrail_url, user, password):
         """ Initialize APIClient
 
+        :param testrail_url: url for TestRail
         :param user: username, should be your @hp email address
         :param password: API key, generate it via TestRail settings
         """
         logging.basicConfig(level=logging.INFO)
-        self.client = APIClient('https://jiracso.testrail.net')
+        self.client = APIClient(testrail_url)
         self.client.user = user
         self.client.password = password
 

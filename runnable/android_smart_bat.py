@@ -11,7 +11,7 @@ client = APIClient(CFG.TESTRAIL_LINK)
 client.user = CFG.USERNAME
 client.password = CFG.PASSWORD
 
-trf = TestRailFlow(user=client.user, password=client.password)
+trf = TestRailFlow(CFG.TESTRAIL_LINK, client.user, client.password)
 
 # ########## Usage sample of some TestRailFlow easy methods ##########
 

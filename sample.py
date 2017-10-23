@@ -5,16 +5,17 @@ from flows.jenkins_flow import JenkinsFlow
 from flows.testrail_flow import TestRailFlow
 from testrailAPI.testrail_3 import *
 
-user = 'ho-lun-zavvio.mok@hp.com'  # username = @hp.com email address
-password = '3HI/BnjdpLGdkHIjdzC2-mnEkT3LbEZQTUPvF.P4x'  # API Key - generate this via TestRail settings
+user = ''  # username = @hp.com email address
+password = ''  # API Key - generate this via TestRail settings
 
 # ########## Initiate TestRail API object ##########
 
-client = APIClient('https://jiracso.testrail.net')
+testrail_url = 'https://testrail.tools.cso-hp.com'
+client = APIClient(testrail_url)
 client.user = user
 client.password = password
 
-trf = TestRailFlow(user=user, password=password)
+trf = TestRailFlow(testrail_url, user, password)
 
 # ########## Usage sample of some TestRailFlow easy methods ##########
 
